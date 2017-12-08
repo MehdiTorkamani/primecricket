@@ -6,9 +6,6 @@ var StateMain = {
     
     create: function () {
         
-        var wScale = game.width / 800;
-        var hScale = game.height / 500;
-        
         sky = game.add.image(-2,-2,"sky");
         sky.scale.setTo(wScale,hScale);
         
@@ -19,34 +16,38 @@ var StateMain = {
         
         //reset the score
         score = 0;
-        ballSpeed = 200;
+        ballSpeed = 200 * deviceScale;
         playerAnswer = 0;
         this.batAnimationPlaying = false;
         this.wicketAnimationPlaying = false;
+        this.decideAnswer = false;
         
-        p1 = new Phaser.Point(game.width*1.5,game.height*0.4);
-        p2 = new Phaser.Point(game.width/2,game.height - 75);
-        p3 = new Phaser.Point(game.width/4,p2.y - 30)
-        p4 = new Phaser.Point(game.width,0);
+        p1 = new Phaser.Point(game.width, game.height - (deviceScale * 80 + 30 > 180 ? 180 : deviceScale * 80 + 30));
         
+        p2 = new Phaser.Point(400, game.height - 75);
+        p3 = new Phaser.Point(60, game.height - 125)
         
-        player = game.add.image(p3.x,p3.y,"yellow");
+        thought = game.add.image(p3.x + 50, p2.y - 162, "thought");
+        thought.anchor.set(0.7,1);
+        thought.scale.setTo(1,0.6);
+        
+        player = game.add.image(p3.x +20 ,p3.y - 172,"yellow");
         player.anchor.set(0.5,0.5);
+        player.scale.setTo(0.5,0.2);
+        
         
         ball = game.add.sprite(p1.x, p1.y,"ball");
-        ball.scale.setTo(0.05,0.05);
+        ball.scale.setTo(0.5,0.5);
         ball.anchor.set(0.5,1);
         game.physics.arcade.enable(ball);
         
         var pitch = game.add.tileSprite(0, game.height - 75,game.width,75,"pitch");  
         
-        character = game.add.sprite(p3.x-20, p2.y,"bat");
-        character.scale.setTo(0.2,0.2);
-        character.anchor.set(0.5,1);
-        character.animations.add("hit",[0,1,3,4,2,5,5,2,4,3,1,0],12,false);
+        character = game.add.sprite(p3.x+ 15, p2.y,"bat");
+        character.anchor.set(0,1);
+        character.animations.add("hit",[0,1,3,4,2,5,5,5,5,5,5,5,5,2,4,3,1,0],12,false);
         
-        wicket = game.add.sprite(p3.x - 100, p2.y, "wicket");
-        wicket.scale.setTo(0.12,0.12);
+        wicket = game.add.sprite(p3.x, p2.y, "wicket");
         wicket.anchor.set(1,1);
         wicket.animations.add("out",[0,1,3,4,2,5],12,false);
         
@@ -57,14 +58,14 @@ var StateMain = {
         primeButton.events.onInputDown.add(this.primeClicked,this);
         primeButton.events.onInputUp.add(this.primeReleased,this);
         
-        scoreText = game.add.text(game.world.centerX,game.world.height*0.1,"score: " + score);
+        scoreText = game.add.text(game.world.width*0.95,game.world.height*0.05,"score: " + score);
         scoreText.fill = "#ffffff";
-        scoreText.fontSize = 16;
-        scoreText.anchor.set(0.5,0.5);
+        scoreText.fontSize = 18 * deviceScale;
+        scoreText.anchor.set(1,0);
         
-        numberText = game.add.text(game.world.centerX,game.world.height*0.2,"0");
+        numberText = game.add.text(game.world.centerX,game.world.height*0.4,"0");
         numberText.fill = "#ffffff";
-        numberText.fontSize = 16;
+        numberText.fontSize = 45 * deviceScale;
         numberText.anchor.set(0.5,0.5);
         
         this.newShot();
@@ -86,6 +87,8 @@ var StateMain = {
     {
         this.batAnimationPlaying = false;
         this.wicketAnimationPlaying = false;
+        this.decideAnswer = false;
+        
         isPrime = game.rnd.integerInRange(0,1);
         
         if(isPrime==1)
@@ -102,12 +105,14 @@ var StateMain = {
     },
 
     update: function () {
+        //if ball hits ground head for wicket
         if(ball.y >= p2.y)
             {
                 game.physics.arcade.moveToXY(ball, p3.x, p3.y, ballSpeed);
             }
         
-        if(ball.x < (p2.x+p3.x)/2*0.8)
+        //start player bat animation when ball reaches certain proximity to player
+        if(ball.x < p2.x - 50)
             {
                 if(!this.batAnimationPlaying)
                     {
@@ -116,14 +121,17 @@ var StateMain = {
                     }
             }
         
-        if(ball.x < p3.x)
+        //deciding moment when answer is accepted. Ball is hit by bat or ball will continue to wicket
+        if(ball.x < p2.x - 180 && !this.decideAnswer)
             {   
                 if(playerAnswer == isPrime)
                     {
-                        game.physics.arcade.moveToXY(ball, p4.x, p4.y, ballSpeed*5);
+                        game.physics.arcade.moveToXY(ball, game.width, 0, ballSpeed*5);
                     }
+                this.decideAnswer = true;
             }
         
+        //if ball reaches wicket start wicket out animation
         if(ball.x < wicket.x+10)
             {
                 if(!this.wicketAnimationPlaying)
@@ -133,17 +141,16 @@ var StateMain = {
                                 
                                 game.time.events.add(Phaser.Timer.SECOND * 2, this.restartLevel, this);
                             }
-                if(ball.x<-10)
-                    {
-                        ball.body.velocity = 0;
-                    }
+                
             }
         
         
-        if(ball.y < p4.y)
+        // if ball is hit by bat and goes heigher than game height start new shot
+        if(ball.x > game.width + 10)
             {
                 score += 6;
                 scoreText.text = "score: " + score;
+            //    ball.body.velocity = 0;
                 this.newShot();
             }
         

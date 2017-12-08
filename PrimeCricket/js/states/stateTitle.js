@@ -6,21 +6,31 @@ var StateTitle = {
     }
     , create: function () {
         
-        var wScale = game.width / 800;
-        var hScale = game.height / 500;
-        
         sky = game.add.image(-2,-2,"sky");
         sky.scale.setTo(wScale,hScale);
         
-        var titleText = game.add.text(game.world.centerX, game.world.centerY - 100, "Prime Cricket");
-        titleText.fill = "#ffffff";
-        titleText.anchor.set(0.5, 0.5);
-
-        this.btnStart = gameButtons.addButton("start", -1, -1, this.startGame, this);
+        var pitch = game.add.tileSprite(0, game.height - 75,game.width,75,"pitch");  
         
+        var titleText = game.add.text(game.world.centerX, game.world.centerY *0.2, "Prime Cricket", {font: "bold 36px Bowlby+One+SC", fill: "#3e9f77", stroke:  "#ffffff", strokeThickness: 8, align: "center"});
+        
+        titleText.anchor.set(0.5, 0);
+        titleText.fontSize = 36*deviceScale;
+        
+
+    //    this.btnStart = gameButtons.addButton("start", -1, -1, this.startGame, this);
+        this.btnStart = gameButtons.addMyButton("mystartbuttons",-1,-1,this.startGame, this);
+        
+        this.btnStart.scale.setTo(deviceScale/2,deviceScale/2);
         
     }
-    , startGame: function () {
+    ,
+    
+    startGame: function () 
+    {
+        game.time.events.add(Phaser.Timer.SECOND * 0.2, this.beginGame, this)  
+    },
+    
+    beginGame: function () {
         game.state.start("StateMain");
     }
     , update: function () {

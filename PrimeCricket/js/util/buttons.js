@@ -1,5 +1,20 @@
 GameButtons = function () {
+    
+    this.addMyButton = function (type, xx, yy, f, scope) {
+            if (xx == -1) {
+                xx = game.world.centerX;
+            }
+            if (yy == -1) {
+                yy = game.world.centerY;
+            }
 
+            var over = 0;
+            var down = 1;
+
+            var button = game.add.button(xx, yy, type, f, scope, over, down, over,down);
+            button.anchor.set(0.5, 0.5);
+            return button;
+        },
 
     this.addButton = function (type, xx, yy, f, scope) {
             if (xx == -1) {
@@ -35,7 +50,7 @@ GameButtons = function () {
                 break;
             }
 
-            var button = game.add.button(xx, yy, "buttons", f, scope, down, over, down);
+            var button = game.add.button(xx, yy, "buttons", f, scope, down, over, down,down);
             button.anchor.set(0.5, 0.5);
             return button;
         },

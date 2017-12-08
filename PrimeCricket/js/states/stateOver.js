@@ -5,31 +5,32 @@ var StateOver = {
 
     }
     , create: function () {
-        
-        var wScale = game.width / 800;
-        var hScale = game.height / 500;
-        
+          
         sky = game.add.image(-2,-2,"sky");
         sky.scale.setTo(wScale,hScale);
         
-        var overText = game.add.text(game.world.centerX, game.world.centerY *0.2, "OUT!");
+        var pitch = game.add.tileSprite(0, game.height - 75,game.width,75,"pitch");  
+        
+        var overText = game.add.text(game.world.centerX, game.height *0.2, "OUT!");
         overText.fill = "#ffffff";
-        overText.anchor.set(0.5, 0.5);
-        overText.fontSize = 24;
+        overText.anchor.set(0.5, 0);
+        overText.fontSize = 16 * deviceScale;
         
-        var lostText = "Wrong answer: " + number + (isPrime == 1 ? " is a prime number." : " is not a prime number.");
+        var lostText = number + (isPrime == 1 ? " is a prime number" : " is not a prime number");
         
-        var infoText = game.add.text(game.world.centerX, game.world.centerY *0.4, lostText);
+        var infoText = game.add.text(game.world.centerX, game.height *0.3, lostText);
         infoText.fill = "#ffffff";
-        infoText.anchor.set(0.5, 0.5);
-        infoText.fontSize = 16;
+        infoText.anchor.set(0.5, 0);
+        infoText.fontSize = 16 * deviceScale;
         
-        var finalScoreText = game.add.text(game.world.centerX, game.world.centerY *0.6, "Final score: " + score);
+        var finalScoreText = game.add.text(game.world.centerX, game.height *0.5, "FINAL SCORE: " + score);
         finalScoreText.fill = "#ffffff";
         finalScoreText.anchor.set(0.5, 0.5);
-        finalScoreText.fontSize = 16;
+        finalScoreText.fontSize = 20 * deviceScale;
 
-        this.btnPlayAgain = gameButtons.addButton("playAgain", -1, -1, this.playAgain, this);
+        this.btnPlayAgain = gameButtons.addButton("playAgain", game.world.centerX, game.height * 0.7, this.playAgain, this);
+        
+        this.btnPlayAgain.scale.setTo(deviceScale/2,deviceScale/2);
     }
     , playAgain: function () {
         game.state.start("StateMain");

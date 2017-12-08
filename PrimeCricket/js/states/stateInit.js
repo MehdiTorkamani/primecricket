@@ -1,21 +1,15 @@
 var StateInit = {
 
     preload: function () {
-        var wScale = game.width / 800;
-        var hScale = game.height / 500;
         
-        sky = game.add.image(-2,-2,"sky");
-        sky.scale.setTo(wScale,hScale);
-        
-        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         game.scale.pageAlignHorizontally = true;
         game.scale.pageAlignVertically = true;
         
-        game.stage.backgroundColor = "#6ad352"
+        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        
         
         game.load.image("loadingEmpty", "images/loading/progress_none.png");
         game.load.image("loadingFull", "images/loading/progress_all.png");
-       
 
         if (screen.width < 1500) {
             if (useLandscape == true) {
@@ -31,7 +25,9 @@ var StateInit = {
 
     }
     , create: function () {
+        
         game.state.start("StateLoad");
+        
     }
     , update: function () {
 

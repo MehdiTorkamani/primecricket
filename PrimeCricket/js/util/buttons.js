@@ -1,5 +1,21 @@
 GameButtons = function () {
     
+    this.addMyPrimes = function (type, xx, yy, f, scope) {
+            if (xx == -1) {
+                xx = game.world.centerX;
+            }
+            if (yy == -1) {
+                yy = game.world.centerY;
+            }
+
+            var over = 0;
+            var down = 1;
+
+            var button = game.add.button(xx, yy, type, f, scope, down, down, over,over);
+            button.anchor.set(1, 1);
+            return button;
+        },
+    
     this.addMyButton = function (type, xx, yy, f, scope) {
             if (xx == -1) {
                 xx = game.world.centerX;
@@ -76,11 +92,15 @@ GameButtons = function () {
             return mButton;
         }
         , this.updateButtons = function () {
+        
+        /* For Music
             if (musicOn == true) {
                 this.musicButton.frame = 2;
             } else {
                 this.musicButton.frame = 3;
             }
+    
+        */
             if (soundOn == true) {
 
                 this.soundButton.frame = 0;

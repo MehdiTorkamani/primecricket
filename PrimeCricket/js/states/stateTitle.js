@@ -18,9 +18,18 @@ var StateTitle = {
         
 
     //    this.btnStart = gameButtons.addButton("start", -1, -1, this.startGame, this);
-        this.btnStart = gameButtons.addMyButton("mystartbuttons",-1,-1,this.startGame, this);
+        this.btnStart = gameButtons.addMyButton("startbuttons",-1,-1,this.startGame, this);
         
         this.btnStart.scale.setTo(deviceScale/2,deviceScale/2);
+        
+        this.btnSound = gameButtons.addAudioButton("sound", 20, 70, gameButtons.toggleSound, this);
+        
+        
+        batsound = game.add.audio("batsound");
+        wicketsound = game.add.audio("wicketsound");
+        
+        //init the sound buttons
+        gameButtons.updateButtons();
         
     }
     ,

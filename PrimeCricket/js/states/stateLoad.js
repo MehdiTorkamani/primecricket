@@ -16,10 +16,18 @@ var StateLoad = {
 
         //PRELOAD EVERYTHING HERE
         game.load.spritesheet("buttons", "images/ui/buttons-red.png", 265, 75);
-        game.load.spritesheet("mystartbuttons","images/ui/mystart.png",284,92);
+        game.load.spritesheet("startbuttons","images/ui/start.png",284,92);
+        game.load.spritesheet("playagainbuttons","images/ui/playagain.png",284,92);
+        game.load.spritesheet("prime","images/ui/prime.png",200,71);
+        game.load.spritesheet("notprime","images/ui/notprime.png",200,71);
+        
+        
         game.load.spritesheet("soundButtons", "images/ui/soundButtons-blue.png", 44, 44, 4);
         game.load.audio("backgroundMusic", "audio/background/piano.mp3");
         game.load.audio("elephant", "audio/sfx/elephant.mp3");
+        game.load.audio("batsound", "audio/sfx/bat.mp3");
+        game.load.audio("wicketsound", "audio/sfx/wicket.mp3");
+        
         
         game.load.image("ball","images/cricket/ball.png");
         game.load.image("pitch","images/cricket/pitch.png");

@@ -23,16 +23,33 @@ var StateOver = {
         infoText.anchor.set(0.5, 0);
         infoText.fontSize = 16 * deviceScale;
         
-        var finalScoreText = game.add.text(game.world.centerX, game.height *0.5, "FINAL SCORE: " + score);
+        if(score == 60)
+            {
+                overText.text = "WELL DONE!";
+                infoText.text = "You reached the max score!";
+            }
+        
+        var finalScoreText = game.add.text(game.world.centerX, game.height *0.5, "SCORE: " + score);
         finalScoreText.fill = "#ffffff";
         finalScoreText.anchor.set(0.5, 0.5);
         finalScoreText.fontSize = 20 * deviceScale;
-
-        this.btnPlayAgain = gameButtons.addButton("playAgain", game.world.centerX, game.height * 0.7, this.playAgain, this);
+        
+        this.btnPlayAgain = gameButtons.addMyButton("playagainbuttons",game.world.centerX, game.height * 0.7,this.playAgain, this);
         
         this.btnPlayAgain.scale.setTo(deviceScale/2,deviceScale/2);
+        
+        this.btnSound = gameButtons.addAudioButton("sound", 20, 70, gameButtons.toggleSound, this);
+        
+        //init the sound buttons
+        gameButtons.updateButtons();
+        
+        
     }
     , playAgain: function () {
+        game.time.events.add(Phaser.Timer.SECOND * 0.2, this.beginGame, this)  
+    },
+    
+    beginGame: function () {
         game.state.start("StateMain");
     }
     , update: function () {

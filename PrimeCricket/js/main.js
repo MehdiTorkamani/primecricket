@@ -38,6 +38,10 @@ var isPrime;
 
 var sky;
 
+var batsound;
+var wicketsound;
+
+
 //portrait or landscape
 
 var useLandscape = true;

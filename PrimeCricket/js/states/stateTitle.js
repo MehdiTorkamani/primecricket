@@ -22,8 +22,11 @@ var StateTitle = {
         
         this.btnStart.scale.setTo(deviceScale/2,deviceScale/2);
         
-        this.btnSound = gameButtons.addAudioButton("sound", 20, 70, gameButtons.toggleSound, this);
+        this.btnFullScreen = gameButtons.addFullScreenButton(game.width - 10,10,gameButtons.go_FullScreen,this);
+        this.btnFullScreen.anchor.set(1,0);
         
+        this.btnSound = gameButtons.addAudioButton("sound", 10, 10, gameButtons.toggleSound, this);
+        this.btnSound.anchor.set(0,0);
         
         batsound = game.add.audio("batsound");
         wicketsound = game.add.audio("wicketsound");

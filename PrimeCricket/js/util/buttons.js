@@ -70,6 +70,37 @@ GameButtons = function () {
             button.anchor.set(0.5, 0.5);
             return button;
         },
+        
+        this.addFullScreenButton = function (xx, yy, f, scope) {
+
+            var mButton = game.add.sprite(xx, yy, "fullscreen");
+            
+            if(game.scale.isFullScreen)
+                {
+                    mButton.frame = 1;
+                }
+            else
+                {
+                    mButton.frame = 0;
+                }
+        
+            mButton.inputEnabled = true;
+            mButton.events.onInputDown.add(f, scope);
+            return mButton;
+        }
+        ,
+        this.go_FullScreen = function (target, scope) {
+            if(game.scale.isFullScreen)
+            {    
+                game.scale.stopFullScreen();
+                target.frame = 0;
+            }
+            else
+            {
+                game.scale.startFullScreen();
+                target.frame = 1;
+            }
+        },
 
         this.addAudioButton = function (type, xx, yy, f, scope) {
 
@@ -79,7 +110,7 @@ GameButtons = function () {
             if (yy == -1) {
                 yy = game.world.centerY;
             }
-            var mButton = game.add.sprite(xx, yy, "soundButtons");
+            var mButton = game.add.sprite(xx, yy, "audio");
             if (type == "music") {
                 mButton.frame = 2;
                 this.musicButton = mButton;
@@ -89,6 +120,7 @@ GameButtons = function () {
 
             mButton.inputEnabled = true;
             mButton.events.onInputDown.add(f, scope);
+       //     mButton.scale.setTo(0.2,0.2);
             return mButton;
         }
         , this.updateButtons = function () {

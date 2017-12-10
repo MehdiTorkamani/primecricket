@@ -6,6 +6,7 @@ var StateInit = {
         game.scale.pageAlignVertically = true;
         
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
         
         
         game.load.image("loadingEmpty", "images/loading/progress_none.png");

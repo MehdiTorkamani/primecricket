@@ -20,6 +20,8 @@ var StateLoad = {
         game.load.spritesheet("playagainbuttons","images/ui/playagain.png",284,92);
         game.load.spritesheet("prime","images/ui/prime.png",200,71);
         game.load.spritesheet("notprime","images/ui/notprime.png",200,71);
+        game.load.spritesheet("audio","images/ui/myaudio.png",32,32);
+        game.load.spritesheet("fullscreen","images/ui/fullscreen.png",32,32);
         
         
         game.load.spritesheet("soundButtons", "images/ui/soundButtons-blue.png", 44, 44, 4);

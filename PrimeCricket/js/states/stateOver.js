@@ -5,7 +5,6 @@ var StateOver = {
 
     }
     , create: function () {
-          
         sky = game.add.image(-2,-2,"sky");
         sky.scale.setTo(wScale,hScale);
         

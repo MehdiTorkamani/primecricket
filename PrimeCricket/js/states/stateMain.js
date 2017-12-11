@@ -5,17 +5,14 @@ var StateMain = {
     },
     
     create: function () {
-        
         sky = game.add.image(-2,-2,"sky");
         sky.scale.setTo(wScale,hScale);
-        
         
         game.physics.startSystem(Phaser.Physics.Arcade);
         
         primes = [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97];
         nonPrimes = [1,4,6,8,9,10,12,14,15,16,18,20,21,22,24,25,26,27,28,30,32,33,34,35,36,38,39,40,42,44,45,46,48,49,50,51,52,54,55,56,57,58,60,62,63,64,65,66,68,69,70,72,74,75,76,77,78,80,81,82,84,85,86,87,88,90,91,92,93,94,95,96,98,99,100];
         
-        //reset the score
         score = 0;
         ballSpeed = 180 * deviceScale;
         playerAnswer = -1;
@@ -27,13 +24,8 @@ var StateMain = {
         this.newShotCalled = false;
         
         p1 = new Phaser.Point(game.width, game.height - (deviceScale * 80 + 30 > 180 ? 180 : deviceScale * 80 + 30));
-        
         p2 = new Phaser.Point(400, game.height - 75);
         p3 = new Phaser.Point(60, game.height - 125)
-        
-        
-        
-    
         
         ball = game.add.sprite(p1.x, p1.y,"ball");
         ball.scale.setTo(0.5,0.5);
@@ -65,7 +57,6 @@ var StateMain = {
         btnNotPrime.events.onInputDown.add(this.primeReleased,this);
         btnNotPrime.frame = 1;
         
-        
         scoreText = game.add.text(game.world.width*0.95,game.world.height*0.05, score);
         scoreText.fill = "#ffffff";
         scoreText.fontSize = 18 * deviceScale;
@@ -81,7 +72,6 @@ var StateMain = {
     
     primeClicked:function()
     {
-        //player.loadTexture("blue",0);
         btnPrime.frame = 0;
         btnNotPrime.frame = 1;
         playerAnswer = 1;
@@ -89,7 +79,6 @@ var StateMain = {
     
     primeReleased:function()
     {
-        //player.loadTexture("yellow",0);
         btnPrime.frame = 1;
         btnNotPrime.frame = 0;
         playerAnswer = 0;
@@ -125,15 +114,10 @@ var StateMain = {
         numberText.text = number;
 
         game.physics.arcade.moveToXY(ball, p2.x, p2.y, ballSpeed);
-        
     },
 
     update: function () {
-        
-        console.log(ball.x + "    " + ball.y);
         //if ball hits ground head for wicket
-        
-        console.log(this.newShotCalled);
         if(ball.y >= p2.y)
             {
                 game.physics.arcade.moveToXY(ball, p3.x, p3.y, ballSpeed);
@@ -175,11 +159,10 @@ var StateMain = {
                                 
                                 game.time.events.add(Phaser.Timer.SECOND * 2, this.restartLevel, this);
                             }
-                
             }
         
         
-        // if ball is hit by bat and goes heigher than game height start new shot
+        // if ball is hit by bat and goes further than game width + 10 then add score and start new shot
         if(ball.x > game.width + 10 && !this.newShotCalled)
             {
                 score ++;

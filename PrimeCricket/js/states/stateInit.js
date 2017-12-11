@@ -8,7 +8,6 @@ var StateInit = {
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
         
-        
         game.load.image("loadingEmpty", "images/loading/progress_none.png");
         game.load.image("loadingFull", "images/loading/progress_all.png");
 
@@ -18,8 +17,7 @@ var StateInit = {
             } else {
                 game.scale.forceOrientation(false, true);
             }
-
-
+            
             game.scale.enterIncorrectOrientation.add(this.wrongWay, this);
             game.scale.leaveIncorrectOrientation.add(this.rightWay, this);
         }

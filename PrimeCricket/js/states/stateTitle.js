@@ -16,10 +16,7 @@ var StateTitle = {
         titleText.anchor.set(0.5, 0);
         titleText.fontSize = 36*deviceScale;
         
-
-    //    this.btnStart = gameButtons.addButton("start", -1, -1, this.startGame, this);
         this.btnStart = gameButtons.addMyButton("startbuttons",-1,-1,this.startGame, this);
-        
         this.btnStart.scale.setTo(deviceScale/2,deviceScale/2);
         
         this.btnFullScreen = gameButtons.addFullScreenButton(game.width - 10,10,gameButtons.go_FullScreen,this);

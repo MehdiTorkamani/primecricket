@@ -1,5 +1,6 @@
 GameButtons = function () {
     
+    //used for prime/not prime buttons in stateMain
     this.addMyPrimes = function (type, xx, yy, f, scope) {
             if (xx == -1) {
                 xx = game.world.centerX;
@@ -16,6 +17,7 @@ GameButtons = function () {
             return button;
         },
     
+    //used for play/play again buttons
     this.addMyButton = function (type, xx, yy, f, scope) {
             if (xx == -1) {
                 xx = game.world.centerX;
@@ -31,46 +33,8 @@ GameButtons = function () {
             button.anchor.set(0.5, 0.5);
             return button;
         },
-
-    this.addButton = function (type, xx, yy, f, scope) {
-            if (xx == -1) {
-                xx = game.world.centerX;
-            }
-            if (yy == -1) {
-                yy = game.world.centerY;
-            }
-
-            var over = 0;
-            var down = 1;
-
-            switch (type) {
-
-            case "start":
-                over = 6;
-                down = 7;
-                break;
-
-            case "playAgain":
-                over = 0;
-                down = 1;
-                break;
-
-            case "yes":
-                over = 2;
-                down = 3;
-                break;
-
-            case "no":
-                over = 4;
-                down = 5;
-                break;
-            }
-
-            var button = game.add.button(xx, yy, "buttons", f, scope, down, over, down,down);
-            button.anchor.set(0.5, 0.5);
-            return button;
-        },
-        
+    
+        //used for initializing fullscreen button
         this.addFullScreenButton = function (xx, yy, f, scope) {
 
             var mButton = game.add.sprite(xx, yy, "fullscreen");
@@ -89,6 +53,8 @@ GameButtons = function () {
             return mButton;
         }
         ,
+        
+        //full screen function
         this.go_FullScreen = function (target, scope) {
             if(game.scale.isFullScreen)
             {    
@@ -101,7 +67,8 @@ GameButtons = function () {
                 target.frame = 1;
             }
         },
-
+        
+        //used for adding audio button, possibility to add music button
         this.addAudioButton = function (type, xx, yy, f, scope) {
 
             if (xx == -1) {
@@ -120,9 +87,10 @@ GameButtons = function () {
 
             mButton.inputEnabled = true;
             mButton.events.onInputDown.add(f, scope);
-       //     mButton.scale.setTo(0.2,0.2);
             return mButton;
         }
+    
+        //updating audio/music icon to reflect if they are on/off
         , this.updateButtons = function () {
         
         /* For Music
@@ -140,7 +108,10 @@ GameButtons = function () {
                 this.soundButton.frame = 1;
             }
         }
-        , this.toggleMusic = function (target, scope) {
+        ,
+        
+        //function for turning on/off music
+        this.toggleMusic = function (target, scope) {
             musicOn = !musicOn;
             if (musicOn == true) {
                 target.frame = 2;
@@ -149,7 +120,8 @@ GameButtons = function () {
             }
             gameMedia.updateMusic();
         },
-
+        
+        //function for turning on/off audio
         this.toggleSound = function (target, scope) {
             soundOn = !soundOn;
             if (soundOn == true) {

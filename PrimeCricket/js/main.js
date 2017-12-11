@@ -13,9 +13,6 @@ var p2;
 var p3;
 var p4;
 
-//Background ratio
-var deviceScale;
-
 var wScale;
 var hScale;
 
@@ -52,17 +49,25 @@ window.onload = function () {
     if (screen.width > 1500) {
         //desktop laptop
         if (useLandscape == true) {
-      //      game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO,"ph_game");
-            
             game = new Phaser.Game(960, 540, Phaser.AUTO, "ph_game",null,true);
         } else {
 
-            game = new Phaser.Game(480, 640, Phaser.AUTO, "ph_game",null,true);
+            game = new Phaser.Game(540, 960, Phaser.AUTO, "ph_game",null,true);
         }
 
     } else {
         //mobile device
-        game = new Phaser.Game(window.innerWidth>window.innerHeight ? window.innerWidth : window.innerHeight, window.innerWidth > window.innerHeight ? window.innerHeight : window.innerWidth, Phaser.AUTO, "ph_game",null,true);
+        if (useLandscape == true) {
+     //      game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO,"ph_game");
+            
+            game = new Phaser.Game(960, 540, Phaser.AUTO, "ph_game",null,true);
+        } else {
+
+            game = new Phaser.Game(540, 960, Phaser.AUTO, "ph_game",null,true);
+        }
+        
+ //     Alternative Method  
+        //game = new Phaser.Game(window.innerWidth>window.innerHeight ? window.innerWidth : window.innerHeight, window.innerWidth > window.innerHeight ? window.innerHeight : window.innerWidth, Phaser.AUTO, "ph_game",null,true);
     }
     if (screen.width < 1500) {
         if (useLandscape == true) {

@@ -13,14 +13,14 @@ var StateOver = {
         var overText = game.add.text(game.world.centerX, game.height *0.2, "OUT!");
         overText.fill = "#ffffff";
         overText.anchor.set(0.5, 0);
-        overText.fontSize = 16 * deviceScale;
+        overText.fontSize = 32;
         
         var lostText = number + (isPrime == 1 ? " is a prime number" : " is not a prime number");
         
         var infoText = game.add.text(game.world.centerX, game.height *0.3, lostText);
         infoText.fill = "#ffffff";
         infoText.anchor.set(0.5, 0);
-        infoText.fontSize = 16 * deviceScale;
+        infoText.fontSize = 32;
         
         if(score == 60)
             {
@@ -31,11 +31,9 @@ var StateOver = {
         var finalScoreText = game.add.text(game.world.centerX, game.height *0.5, "SCORE: " + score);
         finalScoreText.fill = "#ffffff";
         finalScoreText.anchor.set(0.5, 0.5);
-        finalScoreText.fontSize = 20 * deviceScale;
+        finalScoreText.fontSize = 40;
         
         this.btnPlayAgain = gameButtons.addMyButton("playagainbuttons",game.world.centerX, game.height * 0.7,this.playAgain, this);
-        
-        this.btnPlayAgain.scale.setTo(deviceScale/2,deviceScale/2);
         
         this.btnFullScreen = gameButtons.addFullScreenButton(game.width - 10,10,gameButtons.go_FullScreen,this);
         this.btnFullScreen.anchor.set(1,0);

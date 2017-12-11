@@ -35,8 +35,6 @@ var StateLoad = {
     },
 
     create: function () {
-        deviceScale = game.width/480;
-        
         wScale = game.width / 950;
         hScale = game.height / 598;
         

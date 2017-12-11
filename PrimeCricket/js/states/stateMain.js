@@ -14,7 +14,7 @@ var StateMain = {
         nonPrimes = [1,4,6,8,9,10,12,14,15,16,18,20,21,22,24,25,26,27,28,30,32,33,34,35,36,38,39,40,42,44,45,46,48,49,50,51,52,54,55,56,57,58,60,62,63,64,65,66,68,69,70,72,74,75,76,77,78,80,81,82,84,85,86,87,88,90,91,92,93,94,95,96,98,99,100];
         
         score = 0;
-        ballSpeed = 180 * deviceScale;
+        ballSpeed = 360;
         playerAnswer = -1;
         nprime = 3;
         nnonprime = 3;
@@ -23,7 +23,7 @@ var StateMain = {
         this.decideAnswer = false;
         this.newShotCalled = false;
         
-        p1 = new Phaser.Point(game.width, game.height - (deviceScale * 80 + 30 > 180 ? 180 : deviceScale * 80 + 30));
+        p1 = new Phaser.Point(game.width, game.height - 180);
         p2 = new Phaser.Point(400, game.height - 75);
         p3 = new Phaser.Point(60, game.height - 125)
         
@@ -57,14 +57,14 @@ var StateMain = {
         btnNotPrime.events.onInputDown.add(this.primeReleased,this);
         btnNotPrime.frame = 1;
         
-        scoreText = game.add.text(game.world.width*0.95,game.world.height*0.05, score);
+        scoreText = game.add.text(game.width*0.95,game.height*0.05, score);
         scoreText.fill = "#ffffff";
-        scoreText.fontSize = 18 * deviceScale;
+        scoreText.fontSize = 36;
         scoreText.anchor.set(1,0);
         
-        numberText = game.add.text(game.world.centerX,game.world.height*0.4,"0");
+        numberText = game.add.text(game.width/2,game.height*0.4,"0");
         numberText.fill = "#ffffff";
-        numberText.fontSize = 45 * deviceScale;
+        numberText.fontSize = 36;
         numberText.anchor.set(0.5,0.5);
         
         this.newShot();
@@ -124,11 +124,9 @@ var StateMain = {
                 this.newShotCalled = false;
             }
         
-        //Due to speed of ball, the player bat animation needs to play earlier/later
-        animationReactionDelay = (game.width - 480)*-0.08 + 70
         
         //start player bat animation when ball reaches certain proximity to player
-        if(ball.x < p2.x - 50 - animationReactionDelay)
+        if(ball.x < p2.x - 80)
             {
                 if(!this.batAnimationPlaying)
                     {

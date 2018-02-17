@@ -16,6 +16,11 @@ var StateTitle = {
         titleText.anchor.set(0.5, 0);
         titleText.fontSize = 72;
         
+        var instructionText = game.add.text(game.world.centerX, game.height -77, "Click 'Prime' or 'Not Prime' to decide if the number is a Prime number" , {font: "bold 36px Bowlby+One+SC", fill: "#ffffff", stroke:  "#ffffff", strokeThickness: 0, align: "center"});
+        
+        instructionText.anchor.set(0.5, 1);
+        instructionText.fontSize = 24;
+        
         this.btnStart = gameButtons.addMyButton("startbuttons",-1,-1,this.startGame, this);
         
         this.btnFullScreen = gameButtons.addFullScreenButton(game.width - 10,10,gameButtons.go_FullScreen,this);

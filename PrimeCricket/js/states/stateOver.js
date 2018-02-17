@@ -15,6 +15,11 @@ var StateOver = {
         overText.anchor.set(0.5, 0);
         overText.fontSize = 32;
         
+        var instructionText = game.add.text(game.world.centerX, game.height -77, "Click 'Prime' or 'Not Prime' to decide if the number is a Prime number" , {font: "bold 36px Bowlby+One+SC", fill: "#ffffff", stroke:  "#ffffff", strokeThickness: 0, align: "center"});
+        
+        instructionText.anchor.set(0.5, 1);
+        instructionText.fontSize = 24;
+        
         var lostText = number + (isPrime == 1 ? " is a prime number" : " is not a prime number");
         
         var infoText = game.add.text(game.world.centerX, game.height *0.3, lostText);
